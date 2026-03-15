@@ -54,6 +54,7 @@ def train_epoch(epoch, model, device, loader, optimizer):
 
 # --- eval epoch ---
 
+
 def eval_epoch(model, device, loader):
     """Evaluates the model on a validation set.
 
@@ -86,7 +87,3 @@ def eval_epoch(model, device, loader):
 
     print(f"  Val Loss: {avg_loss:.4f} | Perplexity: {perplexity:.4f}")
     return avg_loss, perplexity
-
-
-
-

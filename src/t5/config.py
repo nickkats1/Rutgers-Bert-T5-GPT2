@@ -9,5 +9,5 @@ MAX_SOURCE_TEXT_LENGTH = 228
 MAX_TARGET_TEXT_LENGTH = 128
 SEED = 42
 SOURCE_PREFIX = "summarize: "
-DATA_PATH = "data/guardian_headlines.csv"
+DATA_PATH = "data/cnbc_headlines.csv"
 OUTPUT_DIR = "models/t5"

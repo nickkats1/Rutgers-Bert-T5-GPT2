@@ -44,7 +44,6 @@ def training_epoch(model, dataloader, loss_fn, optimizer, scheduler, device, n_e
         loss.backward()
         nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
-        scheduler.step()
         optimizer.zero_grad()
 
     accuracy = correct_predictions.double() / n_examples

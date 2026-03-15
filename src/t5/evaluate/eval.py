@@ -14,9 +14,7 @@ def compute_rouge(predictions, actuals):
     Returns:
         Dictionary with average ROUGE-1, ROUGE-2, and ROUGE-L F1 scores.
     """
-    scorer = rouge_scorer.RougeScorer(
-        ["rouge1", "rouge2", "rougeL"], use_stemmer=True
-    )
+    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=True)
 
     rouge1, rouge2, rougeL = 0, 0, 0
 
@@ -48,9 +46,11 @@ def save_predictions(predictions, actuals, path="predictions.csv"):
         actuals: List of actual headline strings.
         path: Output CSV path.
     """
-    df = pd.DataFrame({
-        "Generated Text": predictions,
-        "Actual Text": actuals,
-    })
+    df = pd.DataFrame(
+        {
+            "Generated Text": predictions,
+            "Actual Text": actuals,
+        }
+    )
     df.to_csv(path, index=False)
     print(f"  Predictions saved to {path}")

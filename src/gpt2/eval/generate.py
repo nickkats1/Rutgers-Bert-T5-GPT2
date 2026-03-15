@@ -1,5 +1,6 @@
 """Generate output"""
 
+
 def generate_text(model, tokenizer, device, prompts, max_length=128):
     """Generates headline text from a list of prompts.
 

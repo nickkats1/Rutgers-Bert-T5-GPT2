@@ -22,13 +22,13 @@ def main():
     df = pd.read_csv(bert_config.get("data_path"), delimiter=",")
     df["polarity"] = df["Headlines"].apply(polarity)
     df["sentiment"] = df["polarity"].apply(sentiment)
-    df['sentiment'] = df['sentiment'].map({"Negative": 0, "Neutral": 1, "Positive": 2})
-    
+    df["sentiment"] = df["sentiment"].map({"Negative": 0, "Neutral": 1, "Positive": 2})
+
     # drop polarity and drop duplicates
-    
+
     df.drop(["Time", "polarity"], axis=1, inplace=True)
     df.drop_duplicates(inplace=True)
-    
+
     # Train/val/test split
     df_train, df_test = train_test_split(df, test_size=0.20, random_state=42)
     df_val, df_test = train_test_split(df_test, test_size=50, random_state=42)
@@ -38,7 +38,9 @@ def main():
     max_len = bert_config.get("max_len", 80)
     batch_size = bert_config.get("batch_size", 12)
 
-    train_dataloader = get_dataloader(df_train, tokenizer, max_len, batch_size, shuffle=True)
+    train_dataloader = get_dataloader(
+        df_train, tokenizer, max_len, batch_size, shuffle=True
+    )
     val_dataloader = get_dataloader(df_val, tokenizer, max_len, batch_size)
     test_dataloader = get_dataloader(df_test, tokenizer, max_len, batch_size)
 
@@ -54,14 +56,21 @@ def main():
         print(f"\nEpoch {epoch + 1}/{epochs}")
 
         train_acc, train_loss = training_epoch(
-            model, train_dataloader, loss_fn, optimizer, device, len(df_train)
+            model,
+            train_dataloader,
+            loss_fn,
+            optimizer,
+            device=device,
+            n_examples=len(df_train),
         )
 
         val_acc, val_loss = eval_model(
-            model, val_dataloader, loss_fn, device, len(df_val)
+            model, val_dataloader, loss_fn, device=device, n_examples=len(df_val)
         )
 
-        print(f"  Train Accuracy: {train_acc * 100:.2f}%  |  Train Loss: {train_loss:.4f}")
+        print(
+            f"  Train Accuracy: {train_acc * 100:.2f}%  |  Train Loss: {train_loss:.4f}"
+        )
         print(f"  Val Accuracy:   {val_acc * 100:.2f}%  |  Val Loss:   {val_loss:.4f}")
 
     # Final test evaluation

@@ -3,7 +3,6 @@
 import torch
 
 
-
 class CustomDataset(torch.utils.data.Dataset):
     """A PyTorch Dataset that tokenizes headlines for BERT sentiment classification.
 
@@ -86,4 +85,3 @@ def get_dataloader(df, tokenizer, max_len, batch_size, shuffle=False):
     )
 
     return torch.utils.data.DataLoader(dataset, batch_size=batch_size, shuffle=shuffle)
-

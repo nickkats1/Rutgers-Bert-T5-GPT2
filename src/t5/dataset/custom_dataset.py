@@ -19,7 +19,9 @@ class CustomDataset(torch.utils.data.Dataset):
         target_text: Series of target text strings.
     """
 
-    def __init__(self, dataframe, tokenizer, source_len, target_len, source_col, target_col):
+    def __init__(
+        self, dataframe, tokenizer, source_len, target_len, source_col, target_col
+    ):
         """Initialize the dataset with a dataframe and tokenizer.
 
         Args:

@@ -16,7 +16,7 @@ def polarity(text: str) -> float:
 
 
 
-def sentiment(label: str) -> int:
+def sentiment(label: float) -> int:
     """Input polarity scores to then get discrete sentiment value
     returned.
     
