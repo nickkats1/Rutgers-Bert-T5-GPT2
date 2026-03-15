@@ -1,0 +1,13 @@
+"""Configuration for T5"""
+
+MODEL_NAME = "t5-base"
+TRAIN_BATCH_SIZE = 8
+VALID_BATCH_SIZE = 8
+TRAIN_EPOCHS = 2
+LEARNING_RATE = 2e-4
+MAX_SOURCE_TEXT_LENGTH = 228
+MAX_TARGET_TEXT_LENGTH = 128
+SEED = 42
+SOURCE_PREFIX = "summarize: "
+DATA_PATH = "data/guardian_headlines.csv"
+OUTPUT_DIR = "models/t5"
