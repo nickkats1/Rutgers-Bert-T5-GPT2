@@ -18,7 +18,7 @@ class CustomDataset(torch.utils.data.Dataset):
         headline = (
             self.tokenizer.bos_token
             + self.headlines[idx]
-            + self.self.tokenizer.eos_token
+            + self.tokenizer.eos_token
         )
 
         return headline
