@@ -5,18 +5,15 @@ import os
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 
 import torch
-import torch.nn as nn
-import torch.nn.functional as F
-
 import pandas as pd
-
-device = "cuda:0"
 
 from src.t5.dataset.custom_dataset import CustomDataset
 from src.t5.train.epochs import train, validate
 
 
 def T5Trainer(dataframe, source_text, target_text, model_params, output_dir="."):
+
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     tokenizer = T5Tokenizer.from_pretrained(model_params["MODEL"])
 

@@ -5,7 +5,7 @@ import torch.nn as nn
 import numpy as np
 
 
-def training_epoch(model, dataloader, loss_fn, optimizer, scheduler, device, n_examples):
+def training_epoch(model, dataloader, loss_fn, optimizer, device, n_examples, scheduler=None):
     """Run a single training epoch over the entire dataloader.
 
     Args:
@@ -13,9 +13,9 @@ def training_epoch(model, dataloader, loss_fn, optimizer, scheduler, device, n_e
         dataloader: PyTorch DataLoader containing training batches.
         loss_fn: Loss function (e.g., CrossEntropyLoss).
         optimizer: Optimizer (e.g., Adam, AdamW).
-        scheduler: Learning rate scheduler (e.g., linear warmup).
         device: Device to run training on ('cuda' or 'cpu').
         n_examples: Total number of training examples (for accuracy calculation).
+        scheduler: Optional learning rate scheduler (e.g., linear warmup). Defaults to None.
 
     Returns:
         A tuple of (accuracy, mean_loss) for the epoch.
@@ -44,6 +44,8 @@ def training_epoch(model, dataloader, loss_fn, optimizer, scheduler, device, n_e
         loss.backward()
         nn.utils.clip_grad_norm_(model.parameters(), max_norm=1.0)
         optimizer.step()
+        if scheduler is not None:
+            scheduler.step()
         optimizer.zero_grad()
 
     accuracy = correct_predictions.double() / n_examples

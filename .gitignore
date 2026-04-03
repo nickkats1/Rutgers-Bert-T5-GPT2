@@ -1,3 +1,13 @@
 __pycache__/
 *.pyc
 *.env
+
+# Data files (too large for git — see README for download instructions)
+data/*.csv
+
+# Model artifacts
+src/gpt2/models/
+models/
+model_files/
+*.bin
+*.safetensors
